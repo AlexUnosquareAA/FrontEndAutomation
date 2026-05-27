@@ -2,7 +2,9 @@ import { test, expect } from '@playwright/test'
 import { LoginPage } from '../page-objects/loginPage'
 import { InventoryPage } from '../page-objects/inventoryPage'
 import { CartPage } from '../page-objects/cartPage';
-import { CheckoutStepOnePage } from '../page-objects/checkoutStepOne';
+import { CheckoutStepOnePage } from '../page-objects/checkoutStepOnePage';
+import { CheckoutStepTwoPage } from '../page-objects/checkoutStepTwoPage';
+import { CheckoutCompletePage } from '../page-objects/checkoutCompletePage';
 
 /**
  *  Testing SauceDemo E-Commerce from login to order completion
@@ -13,7 +15,8 @@ test.describe('User Can finish the checkout Process', () => {
     let inventoryPage: InventoryPage;
     let cartPage: CartPage;
     let checkoutStepOnePage: CheckoutStepOnePage;
-
+    let checkoutStepTwoPage: CheckoutStepTwoPage;
+    let checkoutCompletePage: CheckoutCompletePage;
 
     /**
      * Setup page objects before each test
@@ -24,6 +27,8 @@ test.describe('User Can finish the checkout Process', () => {
         inventoryPage = new InventoryPage(page);
         cartPage = new CartPage(page);
         checkoutStepOnePage = new CheckoutStepOnePage(page);
+        checkoutStepTwoPage = new CheckoutStepTwoPage(page);
+        checkoutCompletePage = new CheckoutCompletePage(page);
     })
 
  
@@ -63,7 +68,15 @@ test.describe('User Can finish the checkout Process', () => {
             await checkoutStepOnePage.clickContinue()
         })
 
-        
+        // Step 7: Click on continue button
+        await test.step('Continue to order review', async({}) => {
+            await checkoutStepTwoPage.clickFinish()
+        })
+
+        // Step 8: Return to Inventory page
+        await test.step('Return to the inventory Page', async({}) => {
+            await checkoutCompletePage.returnToInventoryPage()
+        })
     })
 })
 

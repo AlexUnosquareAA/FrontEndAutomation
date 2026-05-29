@@ -1,4 +1,4 @@
-import { Page, Locator } from "@playwright/test";
+import { Page, Locator, expect } from "@playwright/test";
 
 export class LoginPage {
 
@@ -18,11 +18,16 @@ export class LoginPage {
         await this.page.goto('https://www.saucedemo.com/');
     }
 
-    async loginPage(user: string, pass: string) {
+    async signIn(user: string, pass: string) {
         await this.inputUsername.fill(user);
         await this.inputPassword.fill(pass);
         await this.loginButton.click();
-         
+    }
+
+    async verifyLoginPageLoaded() {
+        await expect(this.loginButton).toBeVisible();
+        await expect(this.inputUsername).toBeVisible();
+        await expect(this.inputPassword).toBeVisible();
     }
 
 }

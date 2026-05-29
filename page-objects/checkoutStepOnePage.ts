@@ -1,4 +1,4 @@
-import { Page, Locator } from '@playwright/test';
+import { Page, Locator, expect } from '@playwright/test';
 import { faker } from '@faker-js/faker';
 
 export class CheckoutStepOnePage {
@@ -7,13 +7,15 @@ export class CheckoutStepOnePage {
     readonly inputLastName: Locator;
     readonly inputZipCode: Locator;
     readonly continueButton: Locator;
+    readonly checkoutYourInformationTitle: Locator;
 
     constructor(page: Page) {
         this.page = page;
         this.inputFirstName = page.getByPlaceholder('First Name')
         this.inputLastName = page.getByPlaceholder('Last Name')
         this.inputZipCode = page.getByPlaceholder('Zip/Postal Code')
-        this.continueButton = page.getByRole('button', { name: 'Continue '})
+        this.continueButton = page.getByRole('button', { name: 'Continue'})
+        this.checkoutYourInformationTitle = page.getByText('Checkout: Your Information')
     }
 
     async fillCustomerInformation() {
@@ -33,6 +35,12 @@ export class CheckoutStepOnePage {
 
     async clickContinue() {
         await this.continueButton.click();
+    }
+
+    async verifyPageLoaded() {
+        await expect(this.continueButton).toBeVisible()
+        await expect(this.checkoutYourInformationTitle).toBeVisible()
+
     }
 
 }

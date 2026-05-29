@@ -87,5 +87,65 @@ test.describe('User Can finish the checkout Process', () => {
             await inventoryPage.verifyInventoryPageLoaded(Contants.INVENTORY_URL)
         })
     })
+
+    /**
+        * Test trace on failure
+    */
+
+    test('Verify error handling for empty credentials', async({}) => {
+        await loginPage.gotoLoginPage()
+        await loginPage.verifyLoginPageLoaded()  
+ 
+        await loginPage.clickLoginButton()
+
+        // Expected message for trying to login with empty fields.
+        await loginPage.verifyErrorMessageNoCredentials(Contants.MISSING_USERNAME_ERROR);
+
+        // Invalid message for tryng to login with empty fields - screenshots + trace on failure
+        await loginPage.verifyErrorMessageNoCredentials(Contants.INCORRECT_USERNAME_ERROR);
+    })
+
+    test('Verify error handling for invalid username', async({}) => {
+        await loginPage.gotoLoginPage()
+        await loginPage.verifyLoginPageLoaded()
+
+        // Expected message for trying to login with Invalid Username
+        await loginPage.signIn(Contants.INVALID_USERNAME, Contants.VALID_PASSWORD)
+        await loginPage.verifyErrorMessageNoCredentials(Contants.INVALID_CREDENTIALS_ERROR);
+
+        // Invalid message for tryng to login with Invalid Username - screenshots + trace on failure
+        await loginPage.signIn(Contants.INVALID_USERNAME, Contants.VALID_PASSWORD)
+        await loginPage.verifyErrorMessageNoCredentials(Contants.INCORRECT_ERROR_FOR_INVALID_USERNAME_ERROR);
+    })
+
+    test('Verify error handling for invalid password', async({}) => {
+        await loginPage.gotoLoginPage()
+        await loginPage.verifyLoginPageLoaded()
+
+        // Expected message for trying to login with Invalid Password.
+        await loginPage.signIn(Contants.VALID_USERNAME, Contants.INVALID_PASSWORD)
+        await loginPage.verifyErrorMessageNoCredentials(Contants.INVALID_CREDENTIALS_ERROR);
+
+        // Invalid message for tryng to login with Invalid Password - screenshots + trace on failure
+        await loginPage.signIn(Contants.VALID_USERNAME, Contants.INVALID_PASSWORD)
+        await loginPage.verifyErrorMessageNoCredentials(Contants.INCORRECT_ERROR_FOR_INVALID_PASSWORD_ERROR);
+    })
+
+    test('Verify incorrect locator for Loggin button', async({}) => {
+        await loginPage.gotoLoginPage()
+        await loginPage.verifyLoginPageLoaded2()  
+    })
+
+    test('Verify expected element not present on inventory page', async({}) => {
+        await loginPage.gotoLoginPage()
+        await loginPage.verifyLoginPageLoaded()   
+
+        // Step 2: Login with valid username and password
+        await loginPage.signIn(Contants.VALID_USERNAME, Contants.VALID_PASSWORD)
+        await inventoryPage.verifyInventoryPageLoaded2('Incorrect URL');
+
+    })
 })
+
+ 
 

@@ -40,6 +40,10 @@ export class InventoryPage {
         await expect(this.page).toHaveURL(expectedUrl);
     }
 
+    async verifyInventoryPageLoaded2(expectedUrl2: string) {
+        await expect(this.page).toHaveURL(expectedUrl2)
+    }
+
     async verifyProductVisible() {
         await expect(this.firstProductTitle).toBeVisible();
     }

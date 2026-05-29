@@ -18,6 +18,16 @@ export class Contants {
      static readonly VALID_USERNAME = 'standard_user';
      static readonly VALID_PASSWORD = 'secret_sauce';
 
+     static readonly INVALID_USERNAME = 'Username_Invalid';
+     static readonly INVALID_PASSWORD = 'Username_Password';
 
+    // Error Messages
+
+    static readonly MISSING_USERNAME_ERROR = 'Epic sadface: Username is required'
+    static readonly MISSING_PASSWORD_ERROR = 'Epic sadface: Password is required'
+    static readonly INVALID_CREDENTIALS_ERROR = 'Epic sadface: Username and password do not match any user in this service' 
+    static readonly INCORRECT_USERNAME_ERROR = 'Error Not expected for Empty credentials'
+    static readonly INCORRECT_ERROR_FOR_INVALID_USERNAME_ERROR = 'Username invalid used'
+    static readonly INCORRECT_ERROR_FOR_INVALID_PASSWORD_ERROR = 'Password invalid used'
 
 }

@@ -1,7 +1,11 @@
 {
    
   "compilerOptions": { 
-    "types": ["node"]
+    "types": ["node"],
+    "moduleResolution": "node",
+    "ignoreDeprecations": "6.0",
+    "resolveJsonModule": true,
+    "esModuleInterop": true
   },
  
 }

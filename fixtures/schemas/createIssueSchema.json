@@ -1,0 +1,53 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CreateIssueResponse",
+  "type": "object",
+  "required": ["id", "node_id", "number", "title", "state", "user", "html_url"],
+  "properties": {
+    "id": { "type": "integer" },
+    "node_id": { "type": "string" },
+    "number": { "type": "integer" },
+    "title": { "type": "string" },
+    "state": { 
+      "type": "string",
+      "enum": ["open", "closed"]
+    },
+    "body": { "type": ["string", "null"] },
+    "html_url": { "type": "string" },
+    "url": { "type": "string" },
+    "user": {
+      "type": "object",
+      "required": ["id", "login", "type"],
+      "properties": {
+        "id": { "type": "integer" },
+        "login": { "type": "string" },
+        "type": { "type": "string" }
+      }
+    },
+    "labels": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "color"],
+        "properties": {
+          "id": { "type": "integer" },
+          "name": { "type": "string" },
+          "color": { "type": "string" }
+        }
+      }
+    },
+    "assignee": {
+      "type": ["object", "null"],
+      "properties": {
+        "id": { "type": "integer" },
+        "login": { "type": "string" }
+      }
+    },
+    "milestone": { "type": ["object", "null"] },
+    "locked": { "type": "boolean" },
+    "comments": { "type": "integer" },
+    "created_at": { "type": "string" },
+    "updated_at": { "type": "string" },
+    "closed_at": { "type": ["string", "null"] }
+  }
+}

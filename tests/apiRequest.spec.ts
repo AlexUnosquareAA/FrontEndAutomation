@@ -1,10 +1,12 @@
 import { test, expect } from '@playwright/test' 
 
+import Ajv from 'ajv';
+import activitySchema from '../fixtures/schemas/activitySchema.json';
+import createIssueSchema from '../fixtures/schemas/createIssueSchema.json';
+
+const ajv = new Ajv({ allErrors: true });
  
-
-
-
-
+ 
 test.describe('Github Workflow',  () => {
 
     const REPO = "RepoAA"
@@ -64,6 +66,16 @@ test.describe('Github Workflow',  () => {
             console.log('The activity of the repo is: ' + JSON.stringify(activityRepoData, null, 2))
             expect(activityRepoData.length).toBeGreaterThan(0);
         }
+
+        // SCHEMA VALIDATION - Validate activity payload against the imported JSON schema
+        const validate = ajv.compile(activitySchema)
+        const isValid = validate(activityRepoData);
+
+        if (!isValid) {
+            console.error('Schema Validation Errors:', JSON.stringify(validate.errors, null, 2));
+            }
+    
+         expect(isValid, `JSON Schema validation failed: ${JSON.stringify(validate.errors)}`).toBe(true);
         
     })
 
@@ -86,6 +98,18 @@ test.describe('Github Workflow',  () => {
 
         issueNumber = issueData.number;
         expect(issueNumber).toBeDefined();
+
+        // SCHEMA VALIDATION - Validate issue created payload against the imported JSON schema
+        const validate = ajv.compile(createIssueSchema);
+        const isValid = validate(issueData);
+
+        if (!isValid) {
+            console.error('Issue Creation Schema Validation Errors:', JSON.stringify(validate.errors, null, 2));
+        }
+
+        expect(isValid, `Issue Response contract validation mismatch: ${JSON.stringify(validate.errors)}`).toBe(true);
+        
+        
     });
 
     // Get the bug report created

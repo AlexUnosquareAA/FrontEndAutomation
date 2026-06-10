@@ -28,7 +28,7 @@
 
 ## The API automation framework contains: 
 
- >## 5+ API suite against Github API. 
+## 5+ API suite against Github API. 
     >**- 1. 5+ tests** 
     >**- 2. OAuth token retrieval**
     >**- 3. Schema validation**

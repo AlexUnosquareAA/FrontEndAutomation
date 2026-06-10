@@ -1,4 +1,8 @@
 import { defineConfig, devices } from '@playwright/test';
+import dotenv from 'dotenv'
+
+// Read from default .env file
+dotenv.config()
 
 /**
  * Read environment variables from file.
@@ -12,6 +16,8 @@ import { defineConfig, devices } from '@playwright/test';
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
+
+  tsconfig: './tsconfig.json',
   testDir: './tests',
   /* Run tests in files in parallel */
   fullyParallel: true,
@@ -27,6 +33,14 @@ export default defineConfig({
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
     // baseURL: 'http://localhost:3000',
+    baseURL: 'https://api.github.com',
+    extraHTTPHeaders: {
+      // We set this header per GitHub guidelines
+        'Accept': 'application/vnd.github.v3+json',
+      // Add authorization token to all requests.
+      // Assuming personal access token available in the environment
+        'Authorization': `token ${process.env.API_TOKEN}`,
+    },
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'retain-on-failure',

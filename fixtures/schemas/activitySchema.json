@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "RepositoryActivity",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["id", "node_id", "activity_type", "actor"],
+    "properties": {
+      "id": { "type": "integer" },
+      "node_id": { "type": "string" },
+      "activity_type": { 
+        "type": "string",
+        "enum": ["push", "force_push", "branch_creation", "branch_deletion", "pr_merge", "merge_queue_merge"]
+      },
+      "ref": { "type": "string" },
+      "after_id": { "type": "string" },
+      "before_id": { "type": "string" },
+      "timestamp": { "type": "string" },
+      "actor": {
+        "type": "object",
+        "required": ["id", "login", "type"],
+        "properties": {
+          "id": { "type": "integer" },
+          "login": { "type": "string" },
+          "type": { "type": "string" }
+        }
+      }
+    }
+  }
+}

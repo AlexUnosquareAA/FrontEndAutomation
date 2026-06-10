@@ -1,0 +1,4 @@
+title,body
+[Feature] Support Markdown,Add full markdown styling to issue body details
+[Feature] Dark Mode Toggle,Implement a global dark theme switch for accessibility
+[Feature] Export to PDF,Allow users to download their issue summary reports

@@ -21,7 +21,9 @@ const records = parse(csvContent, {
  
 test.describe('Github Workflow',  () => {
 
-    const REPO = "RepoAA"
+    test.describe.configure({ mode: 'serial' });
+
+    const REPO = `RepoAA-${Date.now()}`
     const USER = 'AlexUnosquareAA';
 
     let issueNumber: any;

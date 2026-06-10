@@ -29,7 +29,11 @@
 ## The API automation framework contains: 
 
  >## 5+ API suite against Github API. 
-    >**- 1. 5+ tests 
-    >**- 2. OAuth token retrieval
-    >**- 3. Schema validation
-    >**- 4. Parameterized from CSV/JSON  
+    >**- 1. 5+ tests** 
+    >**- 2. OAuth token retrieval**
+    >**- 3. Schema validation**
+    >**- 4. Parameterized from CSV/JSON**
+
+<img width="1905" height="999" alt="image" src="https://github.com/user-attachments/assets/e7d9a984-a34d-4fa9-9ff5-62b6fc6a0651" />
+
+    

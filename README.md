@@ -34,6 +34,12 @@
    >### 3. Schema validation.
    >### 4. Parameterized from CSV/JSON.
 
+## To run the API automation tool:
+   >### 1. To run all the framework: npx playwright test
+   >### 2. To run only regression tests: npx playwright test --grep @regression --project=chromium
+   >### 3. To run only smoke tests: npx playwright test --grep @smoke --project=chromium
+
+
 <img width="1905" height="999" alt="image" src="https://github.com/user-attachments/assets/e7d9a984-a34d-4fa9-9ff5-62b6fc6a0651" />
 
     

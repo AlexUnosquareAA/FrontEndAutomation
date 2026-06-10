@@ -5,7 +5,19 @@ import activitySchema from '../fixtures/schemas/activitySchema.json';
 import createIssueSchema from '../fixtures/schemas/createIssueSchema.json';
 
 const ajv = new Ajv({ allErrors: true });
- 
+
+import fs from 'fs';
+import path from 'path';
+import { parse } from 'csv-parse/sync';
+
+// 1. Read and parse the CSV file synchronously
+const csvFilePath = path.resolve(__dirname, 'data/features.csv');
+const csvContent = fs.readFileSync(csvFilePath, 'utf-8');
+
+const records = parse(csvContent, {
+  columns: true,          // Automatically uses the first row (headers) as keys
+  skip_empty_lines: true  // Ignores blank lines in your CSV file
+}); 
  
 test.describe('Github Workflow',  () => {
 
@@ -168,5 +180,32 @@ test.describe('Github Workflow',  () => {
             body: 'Feature description', 
         }); 
     });  
+
+    // Parameterized data from csv/json
+
+    // 2. Loop over each CSV row to generate separate tests
+    for (const record of records as any[]) {
+    
+    // Inject the specific title into the test name to avoid duplicate title errors
+    test(`Should create a feature request: ${record.title}`, async ({ request }) => {
+        
+        const newFeature = await request.post(`/repos/${USER}/${REPO}/issues`, {
+        data: {
+            title: record.title,
+            body: record.body,
+        }
+        });
+        
+    expect(newFeature.ok()).toBeTruthy();
+    
+    const featureData = await newFeature.json();
+
+    // Verify the response data matches the current CSV row data
+    expect(featureData).toMatchObject({
+      title: record.title,
+      body: record.body, 
+    });
+  });
+}
 
 })

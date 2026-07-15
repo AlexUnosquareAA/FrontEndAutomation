@@ -19,15 +19,10 @@ jobs:
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
 
-    - name: Run Playwright regression tests
+    - name: Run Playwright Tests (Regression and Smoke)
       env:
          API_TOKEN: ${{ secrets.API_TOKEN }}
-      run: npx playwright test --grep @regression
-
-    - name: Run Playwright smoke tests
-      env:
-          API_TOKEN: ${{ secrets.API_TOKEN }}
-      run: npx playwright test --grep @smoke  
+      run: npx playwright test --grep "@regression|@smoke"
 
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}

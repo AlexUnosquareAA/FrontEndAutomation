@@ -1,22 +1,22 @@
-import { Page, Locator,expect } from "@playwright/test";
+import { Page, Locator } from "@playwright/test";
+import { BasePage } from "./BasePage";
 
-export class CheckoutStepTwoPage {
-    readonly page: Page;
+export class CheckoutStepTwoPage extends BasePage {
     readonly finishButton: Locator;
     readonly checkoutOverviewTitle: Locator;
 
     constructor(page: Page) {
-        this.page = page;
+        super(page);
         this.finishButton = page.getByRole('button', { name: 'Finish'});
-        this.checkoutOverviewTitle = page.getByText('Checkout: Overview')
+        this.checkoutOverviewTitle = page.getByText('Checkout: Overview');
     }
 
-    async clickFinish() {
-        await this.finishButton.click();
+    async clickFinish(): Promise<void> {
+        await this.clickElement(this.finishButton);
     }
 
     async verifyPageLoaded() {
-        await expect(this.checkoutOverviewTitle).toBeVisible()
-        await expect(this.finishButton).toBeVisible()
+        await this.verifyElementVisible(this.checkoutOverviewTitle);
+        await this.verifyElementVisible(this.finishButton);
     }
 }

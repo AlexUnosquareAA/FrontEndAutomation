@@ -1,9 +1,8 @@
-import { Page, Locator, expect } from '@playwright/test';
+import { Page, Locator } from '@playwright/test';
+import { BasePage } from './BasePage';
 import { Contants } from '../utils/Constants';
 
-export class InventoryPage {
-    
-    readonly page: Page;
+export class InventoryPage extends BasePage {
     readonly firstProductTitle: Locator;
     readonly firstProductAddToCartButton: Locator;
     readonly cartPageIcon: Locator;
@@ -12,8 +11,8 @@ export class InventoryPage {
     readonly firstProductRemoveButton: Locator;
 
     constructor(page: Page) {
-        this.page = page;  
-        this.firstProductTitle =  page.locator('.inventory_item')
+        super(page);  
+        this.firstProductTitle = page.locator('.inventory_item')
             .filter({ hasText: Contants.SAUCE_LABS_BACKPACK });
         this.firstProductAddToCartButton = page.locator('.inventory_item')
             .filter({ hasText: Contants.SAUCE_LABS_BACKPACK })
@@ -26,34 +25,33 @@ export class InventoryPage {
             .getByRole('button', { name: 'Remove' });
     }
 
-    async addProductOne() { 
-        await this.firstProductAddToCartButton.click()
+    async addProductOne(): Promise<void> { 
+        await this.clickElement(this.firstProductAddToCartButton);
     }
 
-    async goToCartPage() {
-        await this.cartPageIcon.click()
+    async goToCartPage(): Promise<void> {
+        await this.clickElement(this.cartPageIcon);
     }
 
     async verifyInventoryPageLoaded(expectedUrl: string) {
-        await expect(this.productsTitle).toBeVisible();
-        await expect(this.inventoryContainer).toBeVisible()
-        await expect(this.page).toHaveURL(expectedUrl);
+        await this.verifyElementVisible(this.productsTitle);
+        await this.verifyElementVisible(this.inventoryContainer);
+        await this.verifyCurrentUrl(expectedUrl);
     }
 
     async verifyInventoryPageLoaded2(expectedUrl2: string) {
-        await expect(this.page).not.toHaveURL(expectedUrl2)
+        await this.verifyCurrentUrlDontExist(expectedUrl2);
     }
 
     async verifyProductVisible() {
-        await expect(this.firstProductTitle).toBeVisible();
+        await this.verifyElementVisible(this.firstProductTitle);
     }
 
     async verifyShoppingCartBadgeVisible() {
-        await expect(this.cartPageIcon).toBeVisible();
+        await this.verifyElementVisible(this.cartPageIcon);
     }
 
     async verifyRemoveButtonVisible() {
-        await expect(this.firstProductRemoveButton).toBeVisible();
+        await this.verifyElementVisible(this.firstProductRemoveButton);
     }
- 
 }

@@ -5,7 +5,12 @@
     "moduleResolution": "node",
     "ignoreDeprecations": "6.0",
     "resolveJsonModule": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "baseUrl": "./",
+    "paths": {
+      "@page-objects/*": ["page-objects/*"],
+      "@utils/*": ["utils/*"]
+    }
   },
  
 }

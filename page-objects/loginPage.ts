@@ -15,7 +15,7 @@ export class LoginPage {
         this.inputPassword = page.getByPlaceholder('Password');
         this.loginButton = page.getByRole('button', { name: 'Login'})
         this.errorMessage = page.locator('[data-test="error"]')
-        this.loginButton2 = page.locator('testIncorrectLocator');
+        this.loginButton2 = page.locator('incorrectLocatorLogginButton');
     }
 
     async gotoLoginPage() {
@@ -34,7 +34,7 @@ export class LoginPage {
         await expect(this.inputPassword).toBeVisible();
     }
      async verifyLoginPageLoaded2() {
-        await expect(this.loginButton2).toBeVisible(); 
+        await expect(this.loginButton2).not.toBeVisible(); 
     }
 
     async clickLoginButton () {

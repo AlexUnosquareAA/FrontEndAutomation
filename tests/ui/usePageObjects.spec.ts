@@ -1,17 +1,17 @@
 import { test } from '@playwright/test';
-import { LoginPage } from '../page-objects/loginPage';
-import { InventoryPage } from '../page-objects/inventoryPage';
-import { CartPage } from '../page-objects/cartPage';
-import { CheckoutStepOnePage } from '../page-objects/checkoutStepOnePage';
-import { CheckoutStepTwoPage } from '../page-objects/checkoutStepTwoPage';
-import { CheckoutCompletePage } from '../page-objects/checkoutCompletePage';
-import { Contants } from '../utils/Constants';
+import { LoginPage } from '@page-objects/loginPage';
+import { InventoryPage } from '@page-objects/inventoryPage';
+import { CartPage } from '@page-objects/cartPage';
+import { CheckoutStepOnePage } from '@page-objects/checkoutStepOnePage';
+import { CheckoutStepTwoPage } from '@page-objects/checkoutStepTwoPage';
+import { CheckoutCompletePage } from '@page-objects/checkoutCompletePage';
+import { Contants } from '@utils/Constants';
 
 /**
  *  Testing SauceDemo E-Commerce from login to order completion
  */
 
-test.describe('User Can finish the checkout Process', () => {
+test.describe('User Can finish the checkout Process', { tag: '@uitest'}, () => {
     let loginPage: LoginPage;
     let inventoryPage: InventoryPage;
     let cartPage: CartPage;

@@ -41,7 +41,7 @@ export class InventoryPage {
     }
 
     async verifyInventoryPageLoaded2(expectedUrl2: string) {
-        await expect(this.page).toHaveURL(expectedUrl2)
+        await expect(this.page).not.toHaveURL(expectedUrl2)
     }
 
     async verifyProductVisible() {

@@ -22,7 +22,7 @@ jobs:
     - name: Run Playwright Tests (Regression and Smoke)
       env:
          API_TOKEN: ${{ secrets.API_TOKEN }}
-      run: npx playwright test --grep "@regression|@smoke"
+      run: npx playwright test --grep "@uitest|@regression|@smoke"
 
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}

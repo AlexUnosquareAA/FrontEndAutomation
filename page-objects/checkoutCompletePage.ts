@@ -1,27 +1,25 @@
-import { Page, Locator,expect } from '@playwright/test'
+import { Page, Locator } from '@playwright/test';
+import { BasePage } from './BasePage';
 
-export class CheckoutCompletePage {
-    readonly page: Page;
+export class CheckoutCompletePage extends BasePage {
     readonly backHomeButton: Locator;
     readonly checkoutCompleteTitle: Locator;
     readonly successfulOrderMessage: Locator;
 
     constructor(page: Page) {
-        this.page = page;
+        super(page);
         this.backHomeButton = page.getByRole('button', { name: 'Back Home'});
         this.checkoutCompleteTitle = page.getByText('Checkout: Complete!');
         this.successfulOrderMessage = page.getByText('Thank you for your order!');
     }
 
-    async returnToInventoryPage() {
-        await this.backHomeButton.click();
+    async returnToInventoryPage(): Promise<void> {
+        await this.clickElement(this.backHomeButton);
     }
 
     async verifyOrderCompleted() {
-        await expect(this.checkoutCompleteTitle).toBeVisible()
-        await expect(this.successfulOrderMessage).toBeVisible()
-        await expect(this.backHomeButton).toBeVisible()
-
-
+        await this.verifyElementVisible(this.checkoutCompleteTitle);
+        await this.verifyElementVisible(this.successfulOrderMessage);
+        await this.verifyElementVisible(this.backHomeButton);
     }
 }

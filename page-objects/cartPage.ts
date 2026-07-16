@@ -1,25 +1,25 @@
-import { Page, Locator, expect } from '@playwright/test'
+import { Page, Locator } from '@playwright/test';
+import { BasePage } from './BasePage';
 
-export class CartPage {
-    readonly page: Page;
+export class CartPage extends BasePage {
     readonly checkoutButton: Locator;
     readonly yourCartTitle: Locator;
     
     constructor(page: Page) {
-        this.page = page;
-        this.checkoutButton = page.getByRole('button', { name: 'Checkout'})
-        this.yourCartTitle = page.getByText('Your Cart')
+        super(page);
+        this.checkoutButton = page.getByRole('button', { name: 'Checkout'});
+        this.yourCartTitle = page.getByText('Your Cart');
     }
 
-    async clickCheckout() {
-        await this.checkoutButton.click()
+    async clickCheckout(): Promise<void> {
+        await this.clickElement(this.checkoutButton);
     }
 
     async verifyYourCartTitleVisible() {
-        await expect(this.yourCartTitle).toBeVisible()
+        await this.verifyElementVisible(this.yourCartTitle);
     }
 
     async verifyCheckoutButtonVisible() {
-        await expect(this.checkoutButton).toBeVisible()
+        await this.verifyElementVisible(this.checkoutButton);
     }
 }

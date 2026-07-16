@@ -19,7 +19,7 @@ jobs:
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
 
-    - name: Run Playwright Tests (Regression and Smoke)
+    - name: Run Playwright Tests (UI, API Regression and API Smoke)
       env:
          API_TOKEN: ${{ secrets.API_TOKEN }}
       run: npx playwright test --grep "@uitest|@regression|@smoke"

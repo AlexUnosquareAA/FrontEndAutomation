@@ -26,8 +26,5 @@ export class Contants {
     static readonly MISSING_USERNAME_ERROR = 'Epic sadface: Username is required'
     static readonly MISSING_PASSWORD_ERROR = 'Epic sadface: Password is required'
     static readonly INVALID_CREDENTIALS_ERROR = 'Epic sadface: Username and password do not match any user in this service' 
-    static readonly INCORRECT_USERNAME_ERROR = 'Epic sadface: Username is required'
-    static readonly INCORRECT_ERROR_FOR_INVALID_USERNAME_ERROR = 'Epic sadface: Username and password do not match any user in this service'
-    static readonly INCORRECT_ERROR_FOR_INVALID_PASSWORD_ERROR = 'Epic sadface: Username and password do not match any user in this service'
-
+    static readonly INCORRECT_USERNAME_ERROR = 'Epic sadface: Username is required' 
 }

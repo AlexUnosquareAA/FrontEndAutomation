@@ -6,11 +6,19 @@
     "playwright": "^1.60.0"
   },
   "devDependencies": {
+    "@cucumber/cucumber": "^13.1.1",
     "@faker-js/faker": "^10.4.0",
     "@playwright/test": "^1.60.0",
-    "@types/node": "^25.9.1"
+    "@types/node": "^25.9.5",
+    "allure-commandline": "^2.43.0",
+    "allure-cucumberjs": "^3.10.2",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "tsx": "^4.23.1"
   },
   "scripts": {
-    "test": "tsc --no-emit && playwright test"
+    "test": "tsc --no-emit && playwright test",
+    "test:cucumber": "node --import tsx --import tsconfig-paths/register ./node_modules/@cucumber/cucumber/bin/cucumber-js",
+    "test:cucumber:tags": "node --import tsx --import tsconfig-paths/register ./node_modules/@cucumber/cucumber/bin/cucumber-js --tags @uitest"
   }
 }

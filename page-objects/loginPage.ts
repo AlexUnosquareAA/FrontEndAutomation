@@ -1,19 +1,19 @@
 import { Page, Locator } from "@playwright/test"; 
-import { BasePage } from "./BasePage";
+import { BasePage } from './BasePage';
 
 export class LoginPage extends BasePage {
     readonly inputUsername: Locator;
     readonly inputPassword: Locator;
     readonly loginButton: Locator;
     readonly loginButton2: Locator;
-    readonly errorMessage: Locator;
+    readonly errorMessage: Locator; 
     
     constructor(page: Page) {
         super(page);
         this.inputUsername = page.getByPlaceholder('Username');
         this.inputPassword = page.getByPlaceholder('Password');
         this.loginButton = page.getByRole('button', { name: 'Login'});
-        this.errorMessage = page.locator('[data-test="error"]');
+        this.errorMessage = page.locator('[data-test="error"]'); 
         this.loginButton2 = page.locator('testIncorrectLocator');
     }
 
@@ -45,4 +45,5 @@ export class LoginPage extends BasePage {
         await this.verifyElementVisible(this.errorMessage);
         await this.verifyElementText(this.errorMessage, errorMessage);
     }
+ 
 }

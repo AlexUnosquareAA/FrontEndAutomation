@@ -22,6 +22,23 @@
 <img width="975" height="518" alt="image" src="https://github.com/user-attachments/assets/aa151c15-ea53-4ef4-9597-c030091f614a" />
 
 
+## To run the automation UI tool:
+   >### 1. Clone the repository
+   >### 2. install dependencies with npm install
+   >### 3. Install Playwright Test for VSCode
+   >### 4. Open the terminal
+   >### 5. Run the UI Tests with the following command: 
+        npx playwright test --grep '@uitest' --project=chromium    
+
+## To run the automation UI tool with Cucumber:
+   >### 1. Clone the repository
+   >### 2. install dependencies with npm install
+   >### 3. Install Playwright Test for VSCode
+   >### 4. Open the terminal
+   >### 5. Run the UI Tests with the following command: 
+        npm run test:cucumber:tags
+   >### 6. Open the cucumber-report.html file to see a complete report.
+
 # API Automation
 
 ## Automation framework with API Playwright

@@ -94,10 +94,7 @@ test.describe('User Can finish the checkout Process', { tag: '@uitest'}, () => {
         await loginPage.clickLoginButton();
 
         // Expected message for trying to login with empty fields.
-        await loginPage.verifyErrorMessageNoCredentials(Contants.MISSING_USERNAME_ERROR);
-
-        // Invalid message for tryng to login with empty fields - screenshots + trace on failure
-        await loginPage.verifyErrorMessageNoCredentials(Contants.INCORRECT_USERNAME_ERROR);
+        await loginPage.verifyErrorMessageNoCredentials(Contants.MISSING_USERNAME_ERROR); 
     });
 
     test('Verify error handling for invalid username', async () => {
@@ -107,10 +104,6 @@ test.describe('User Can finish the checkout Process', { tag: '@uitest'}, () => {
         // Expected message for trying to login with Invalid Username
         await loginPage.signIn(Contants.INVALID_USERNAME, Contants.VALID_PASSWORD);
         await loginPage.verifyErrorMessageNoCredentials(Contants.INVALID_CREDENTIALS_ERROR);
-
-        // Invalid message for tryng to login with Invalid Username - screenshots + trace on failure
-        await loginPage.signIn(Contants.INVALID_USERNAME, Contants.VALID_PASSWORD);
-        await loginPage.verifyErrorMessageNoCredentials(Contants.INCORRECT_ERROR_FOR_INVALID_USERNAME_ERROR);
     });
 
     test('Verify error handling for invalid password', async () => {
@@ -120,11 +113,7 @@ test.describe('User Can finish the checkout Process', { tag: '@uitest'}, () => {
         // Expected message for trying to login with Invalid Password.
         await loginPage.signIn(Contants.VALID_USERNAME, Contants.INVALID_PASSWORD);
         await loginPage.verifyErrorMessageNoCredentials(Contants.INVALID_CREDENTIALS_ERROR);
-
-        // Invalid message for tryng to login with Invalid Password - screenshots + trace on failure
-        await loginPage.signIn(Contants.VALID_USERNAME, Contants.INVALID_PASSWORD);
-        await loginPage.verifyErrorMessageNoCredentials(Contants.INCORRECT_ERROR_FOR_INVALID_PASSWORD_ERROR);
-    });
+     });
 
     test('Verify incorrect locator for Loggin button', async () => {
         await loginPage.gotoLoginPage();

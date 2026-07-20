@@ -14,7 +14,7 @@ BeforeAll(async function () {
     });
 });
 
-// Se ejecuta ANTES de cada Escenario
+// It executes Before each scenario
 Before(async function () {
     // 1. Create an isolated context and a new page. 
     context = await browser.newContext();
@@ -24,7 +24,7 @@ Before(async function () {
     await this.page.setViewportSize({ width: 1280, height: 720 });
 });
 
-// Se ejecuta DESPUÉS de cada Escenario
+// It executes after each scenario
 After(async function (scenario) {
     // 1. Take a screenshot automatically if the test failed
     if (scenario.result?.status === Status.FAILED) {

@@ -16,7 +16,7 @@ test.describe('Github Workflow - Regression Suite', { tag: '@regression' },  () 
     test.describe.configure({ mode: 'serial' });
 
     const REPO = `RepoAA-${Date.now()}`
-    const USER = 'AlexUnosquareAA';
+    const USER = 'AutomationAlex86';
 
     let issueNumber: any;
     let repoId: any;

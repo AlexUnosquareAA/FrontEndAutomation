@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test' 
+import { test, expect, APIRequestContext } from '@playwright/test' 
 import fs from 'fs';  
 import path from 'path';
 import { parse } from 'csv-parse/sync';
@@ -21,14 +21,31 @@ const records = parse(csvContent, {
 test.describe('Github Workflow - Smoke Suite', { tag: '@smoke' }, () => {
     
     const REPO = "RepoAA-Smoke"
-    const USER = 'AlexUnosquareAA';
+    const USER = 'AutomationAlex86';
 
     // Isolated repository lifecycle for the standalone smoke execution
     test.beforeAll(async ({ request }) => {
         const response = await request.post('/user/repos', {
             data: { name: REPO }
         });
-        expect(response.status()).toBe(201); 
+        expect(response.status()).toBe(201);  
+
+    // 2. Poll GitHub until the repository is actually ready
+        let isReady = false;
+        let retries = 5;
+        
+        while (!isReady && retries > 0) {
+        const checkRepo = await request.get(`/repos/${USER}/${REPO}`);
+        if (checkRepo.ok()) {
+            isReady = true;
+        } else {
+            retries--;
+            await new Promise(resolve => setTimeout(resolve, 1000)); // Wait 1 second before retrying
+        }
+        } 
+        if (!isReady) {
+        throw new Error(`Repository ${REPO} was created but did not become available in time.`);
+        }
     });
 
     test.afterAll(async ({ request }) => {
